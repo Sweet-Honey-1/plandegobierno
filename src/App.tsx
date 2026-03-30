@@ -156,27 +156,6 @@ const RESUMEN_EJES = [
 ]
 
 // ─────────────────────────────────────────────
-// HOOK UTILITARIO: scroll-trigger reveal
-// ─────────────────────────────────────────────
-function useScrollReveal(ref: any, targets: any , vars = {}) {
-  useGSAP(() => {
-    if (!ref.current) return
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        targets,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
-          scrollTrigger: { trigger: ref.current, start: 'top 80%' },
-          ...vars,
-        }
-      )
-    }, ref)
-    return () => ctx.revert()
-  }, [])
-}
-
-// ─────────────────────────────────────────────
 // 1. PRESENTACIÓN DEL PLAN
 // ─────────────────────────────────────────────
 function PlanHeroSection() {
@@ -300,7 +279,7 @@ function PlanHeroSection() {
                 <div key={i} className="bg-[#1A1A1A] rounded-2xl px-5 py-3 text-center min-w-[100px]" style={{ opacity: 0 }}>
                   <div className="font-black text-[#F5C800] text-3xl leading-none">
                     <span
-                      ref={el => counterRefs.current[i] = el}
+                      ref={(el) => { counterRefs.current[i] = el; }}
                       data-target={s.target}
                       data-percent={s.percent}
                     >0</span>
@@ -534,7 +513,7 @@ function SaludSection() {
           {SALUD_LINEAS.map((linea, i) => (
             <div
               key={i}
-              ref={el => lineaRefs.current[i] = el}
+              ref={(el) => { lineaRefs.current[i] = el; }}
               className="rounded-[1.5rem] p-6 hover:-translate-y-1 transition-transform duration-300 cursor-default"
               style={{ background: i % 3 === 0 ? '#D72638' : i % 3 === 1 ? '#1A1A1A' : '#F5C800', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
             >
@@ -645,7 +624,7 @@ function EducacionSection() {
           </p>
         </div>
 
-        {/* Objectives timeline */}
+       {/* Objectives timeline */}
         <div className="relative">
           {/* Vertical line */}
           <div className="hidden lg:block absolute left-[220px] top-0 bottom-0 w-0.5 bg-[#D72638]/20 edu-line" />
@@ -654,7 +633,7 @@ function EducacionSection() {
             {EDUCACION_OBJETIVOS.map((obj, i) => (
               <div
                 key={i}
-                ref={el => objRefs.current[i] = el}
+                ref={(el) => { objRefs.current[i] = el; }}
                 className="flex flex-col lg:flex-row gap-6 items-start group"
               >
                 {/* Number block */}
@@ -992,7 +971,7 @@ function IntegridadSection() {
           {INTEGRIDAD_LINEAS.map((linea, i) => (
             <div
               key={i}
-              ref={el => lineaRefs.current[i] = el}
+              ref={(el) => { lineaRefs.current[i] = el; }}
               className="rounded-[1.5rem] overflow-hidden hover:-translate-y-1 transition-transform duration-300 cursor-default"
               style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)', background: i === 1 ? '#1A1A1A' : i === 2 ? '#D72638' : '#F5C800' }}
             >
